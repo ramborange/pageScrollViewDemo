@@ -86,16 +86,7 @@
             button.frame = CGRectMake(btnMargin, 0, btnWidth, btnHeight);
         }
     }];
-    
-    //底部颜色指示条视图
-    UIButton *firstBtn = [self viewWithTag:kHeader_Button_Tag];
-    CGFloat lineview_width = CGRectGetWidth(firstBtn.frame);
-    self.bottomLine.backgroundColor = self.headerStyle.indicatorBarColor;
-    self.bottomLine.frame = CGRectMake(self.headerStyle.headerButtonMargin, self.headerStyle.headerViewHeight-IndicatorBar_height*2, lineview_width, IndicatorBar_height);
-    self.bottomLine.layer.cornerRadius = 1.0;
-    self.bottomLine.layer.masksToBounds = YES;
-    [self addSubview:self.bottomLine];
-    
+
     //根据最后一个标题按钮计算contentSize和对齐方式改变
     UIButton *topLastBtn = [self viewWithTag:kHeader_Button_Tag + self.titleArray.count - 1];
     CGFloat all_X = CGRectGetMaxX(topLastBtn.frame) + self.headerStyle.headerButtonMargin;
@@ -121,6 +112,15 @@
             }
         }
     }
+    
+    //底部颜色指示条视图
+    UIButton *firstBtn = [self viewWithTag:kHeader_Button_Tag];
+    CGFloat lineview_width = CGRectGetWidth(firstBtn.frame);
+    self.bottomLine.backgroundColor = self.headerStyle.indicatorBarColor;
+    self.bottomLine.frame = CGRectMake(CGRectGetMinX(firstBtn.frame), self.headerStyle.headerViewHeight-IndicatorBar_height*2, lineview_width, IndicatorBar_height);
+    self.bottomLine.layer.cornerRadius = 1.0;
+    self.bottomLine.layer.masksToBounds = YES;
+    [self addSubview:self.bottomLine];
     
     //设置顶部滚动菜单视图的contentSize
     self.contentSize = CGSizeMake(all_X, self.headerStyle.headerViewHeight);
